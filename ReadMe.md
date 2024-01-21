@@ -1,6 +1,6 @@
 # Capstone 1 Project
 
-### **Still Work in Progress**
+### **Still Work in Progress***
 
 ## Description: 
 
