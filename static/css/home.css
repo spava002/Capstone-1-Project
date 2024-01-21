@@ -1,0 +1,4 @@
+/* 'Open Sans' as primary font, 'sans-serif' is an alternate option */
+body {
+    font-family: 'Open Sans', sans-serif;
+}
