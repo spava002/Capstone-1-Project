@@ -2,6 +2,7 @@ from flask import Flask, render_template, url_for, redirect, request, session
 from flask_sqlalchemy import SQLAlchemy
 import logging
 
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'Ry7q9tx98x2ETYojiUX923nJ'
 # All database info wil be stored within stocks.db
