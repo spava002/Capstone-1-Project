@@ -25,9 +25,13 @@ class user:
     def fav_stocks():
         print("Enter stock to add to favorites list:")
         user.fav_list.append(input())
-        print("Stock "+ fav_list[-1]+" was added to you list!")
+        print("Stock "+ user.fav_list[-1]+" was added to you list!")
 
 pedro = user
-pedro.password()
+##pedro.password()
+pedro.fav_stocks()
+pedro.fav_stocks()
+print(pedro.fav_list)
+
 
 
