@@ -18,7 +18,7 @@
                 <!-- Displays error message if credentials are incorrect -->
                 {% with messages = get_flashed_messages(with_categories=true) %}
                     {% for category, message in messages %}
-                        {% if category == 'loginError' %}
+                        {% if category == 'login_error' %}
                             <div>{{ message }}</div>
                         {% endif %}
                     {% endfor %}
@@ -65,7 +65,7 @@
                 <!-- Displays error message if credentials are incorrect -->
                 {% with messages = get_flashed_messages(with_categories=true) %}
                     {% for category, message in messages %}
-                        {% if category == 'signupError' %}
+                        {% if category == 'signup_error' %}
                             <div>{{ message }}</div>
                         {% endif %}
                     {% endfor %}

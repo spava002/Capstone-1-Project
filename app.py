@@ -55,10 +55,10 @@ def loginUser():
             password = login_form.username.data
             currentUser = Users.query.filter_by(username=username).first()
             if currentUser and currentUser.password == password:
-                session['currentUser'] = username
+                session['current_user'] = username
                 return redirect(url_for("homePage"))
             else:
-                flash("Invalid username or password. Try again.", "loginError")
+                flash("Invalid username or password. Try again.", "login_error")
         return render_template("login.html", login_form=login_form, signup_form=signup_form)
 
 
@@ -69,21 +69,18 @@ def signupUser():
     login_form = login()
     signup_form = signup()
     if signup_form.validate_on_submit():
-        print("Sign up submitted.")
         username = login_form.username.data
         password = login_form.username.data
         newUser = Users.query.filter_by(username=username).first()
         # User exists in database
         if newUser:
-            print("A user already exists.")
-            flash("Username taken. Try again.", "signupError")
+            flash("Username taken. Try again.", "signup_error")
         # User doesn't exist in database
         else:
-            print("User created.")
             new_user = Users(username=username, password=password)
             db.session.add(new_user)
             db.session.commit()
-            session['currentUser'] = username
+            session['current_user'] = username
             return redirect(url_for("homePage"))
     return render_template("login.html", login_form=login_form, signup_form=signup_form)
 
@@ -91,7 +88,7 @@ def signupUser():
 # Route for main home page
 @app.route("/home", methods=['POST', 'GET'])
 def homePage():
-    current_user = session.get('currentUser')
+    current_user = session.get('current_user')
     return render_template("home.html", current_user=current_user)
 
 # Needs to be implemented
