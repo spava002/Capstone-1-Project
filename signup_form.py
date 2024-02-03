@@ -17,7 +17,7 @@ def confirmPassword(form, field):
         raise ValidationError("Passwords do not match!")
 
 
-class signUp(FlaskForm):
+class signup(FlaskForm):
     # Required parameters to sign up
     username = StringField('Username: ', validators=[DataRequired(), Length(min=3, max=50, message='Invalid username. Must be between 3-20 characters.')], render_kw={"autocomplete": "off"})
     password = PasswordField('Password: ', validators=[DataRequired(), Length(min=3, max=50), validatePassword])

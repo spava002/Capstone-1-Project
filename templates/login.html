@@ -11,7 +11,7 @@
 
         <!-- Form for collecting login information -->
         <form method="POST" action="/login">
-            {{ loginForm.hidden_tag() }}
+            {{ login_form.hidden_tag() }}
             <fieldset>
             <div>
                 <h3>Login</h3>
@@ -25,40 +25,40 @@
                 {% endwith %}
                 <!-- Receives the required input of 'username' -->
                 <!-- Wanted to test this -->
-                {{ loginForm.username.label }}
-                {% if loginForm.username.errors %}
-                {{ loginForm.username }}
+                {{ login_form.username.label }}
+                {% if login_form.username.errors %}
+                {{ login_form.username }}
                 <div>
-                    {% for error in loginForm.username.errors %}
+                    {% for error in login_form.username.errors %}
                     <span>{{ error }}</span>
                     {% endfor %}
                 </div>
                 {% else %}
-                {{ loginForm.username }}
+                {{ login_form.username }}
                 {% endif %}
 
                 <!-- Receives the required input of 'password' -->
-                {{ loginForm.password.label }}
-                {% if loginForm.password.errors %}
-                {{ loginForm.password }}
+                {{ login_form.password.label }}
+                {% if login_form.password.errors %}
+                {{ login_form.password }}
                 <div>
-                    {% for error in loginForm.password.errors %}
+                    {% for error in login_form.password.errors %}
                     <span>{{ error }}</span>
                     {% endfor %}
                 </div>
                 {% else %}
-                {{ loginForm.password }}
+                {{ login_form.password }}
                 {% endif %}
             </div>
             </fieldset>
             <div>
-            {{ loginForm.submit }}
+            {{ login_form.submit }}
             </div>
         </form>
 
         <!-- Form for collecting sign up information -->
         <form method="POST" action="/sign-up">
-            {{ signupForm.hidden_tag() }}
+            {{ signup_form.hidden_tag() }}
             <fieldset class="form-group">
             <div class="form-group">
                 <h3>Sign-up</h3>
@@ -71,47 +71,47 @@
                     {% endfor %}
                 {% endwith %}
                 <!-- Receives the required input of 'username' -->
-                {{ signupForm.username.label }}
-                {% if signupForm.username.errors %}
-                {{ signupForm.username }}
+                {{ signup_form.username.label }}
+                {% if signup_form.username.errors %}
+                {{ signup_form.username }}
                 <div>
-                    {% for error in signupForm.username.errors %}
+                    {% for error in signup_form.username.errors %}
                     <span>{{ error }}</span>
                     {% endfor %}
                 </div>
                 {% else %}
-                {{ signupForm.username }}
+                {{ signup_form.username }}
                 {% endif %}
 
                 <!-- Receives the required input of 'password' -->
-                {{ signupForm.password.label }}
-                {% if signupForm.password.errors %}
-                {{ signupForm.password }}
+                {{ signup_form.password.label }}
+                {% if signup_form.password.errors %}
+                {{ signup_form.password }}
                 <div>
-                    {% for error in signupForm.password.errors %}
+                    {% for error in signup_form.password.errors %}
                     <span>{{ error }}</span>
                     {% endfor %}
                 </div>
                 {% else %}
-                {{ signupForm.password }}
+                {{ signup_form.password }}
                 {% endif %}
 
                 <!-- Receives the required input of 'confirm password' -->
-                {{ signupForm.confirm_password.label }}
-                {% if signupForm.confirm_password.errors %}
-                {{ signupForm.confirm_password }}
+                {{ signup_form.confirm_password.label }}
+                {% if signup_form.confirm_password.errors %}
+                {{ signup_form.confirm_password }}
                 <div>
-                    {% for error in signupForm.confirm_password.errors %}
+                    {% for error in signup_form.confirm_password.errors %}
                     <span>{{ error }}</span>
                     {% endfor %}
                 </div>
                 {% else %}
-                {{ signupForm.confirm_password }}
+                {{ signup_form.confirm_password }}
                 {% endif %}
             </div>
             </fieldset>
             <div>
-            {{ signupForm.submit }}
+            {{ signup_form.submit }}
             </div>
         </form>
     </body>
