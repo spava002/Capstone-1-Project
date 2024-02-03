@@ -8,5 +8,111 @@
 
     <body>
         <h1>Login Page</h1>
+
+        <!-- Form for collecting login information -->
+        <form method="POST" action="/login">
+            {{ loginForm.hidden_tag() }}
+            <fieldset>
+            <div>
+                <h3>Login</h3>
+                <!-- Displays error message if credentials are incorrect -->
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% for category, message in messages %}
+                        {% if category == 'loginError' %}
+                            <div>{{ message }}</div>
+                        {% endif %}
+                    {% endfor %}
+                {% endwith %}
+                <!-- Receives the required input of 'username' -->
+                <!-- Wanted to test this -->
+                {{ loginForm.username.label }}
+                {% if loginForm.username.errors %}
+                {{ loginForm.username }}
+                <div>
+                    {% for error in loginForm.username.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ loginForm.username }}
+                {% endif %}
+
+                <!-- Receives the required input of 'password' -->
+                {{ loginForm.password.label }}
+                {% if loginForm.password.errors %}
+                {{ loginForm.password }}
+                <div>
+                    {% for error in loginForm.password.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ loginForm.password }}
+                {% endif %}
+            </div>
+            </fieldset>
+            <div>
+            {{ loginForm.submit }}
+            </div>
+        </form>
+
+        <!-- Form for collecting sign up information -->
+        <form method="POST" action="/sign-up">
+            {{ signupForm.hidden_tag() }}
+            <fieldset class="form-group">
+            <div class="form-group">
+                <h3>Sign-up</h3>
+                <!-- Displays error message if credentials are incorrect -->
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% for category, message in messages %}
+                        {% if category == 'signupError' %}
+                            <div>{{ message }}</div>
+                        {% endif %}
+                    {% endfor %}
+                {% endwith %}
+                <!-- Receives the required input of 'username' -->
+                {{ signupForm.username.label }}
+                {% if signupForm.username.errors %}
+                {{ signupForm.username }}
+                <div>
+                    {% for error in signupForm.username.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ signupForm.username }}
+                {% endif %}
+
+                <!-- Receives the required input of 'password' -->
+                {{ signupForm.password.label }}
+                {% if signupForm.password.errors %}
+                {{ signupForm.password }}
+                <div>
+                    {% for error in signupForm.password.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ signupForm.password }}
+                {% endif %}
+
+                <!-- Receives the required input of 'confirm password' -->
+                {{ signupForm.confirm_password.label }}
+                {% if signupForm.confirm_password.errors %}
+                {{ signupForm.confirm_password }}
+                <div>
+                    {% for error in signupForm.confirm_password.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ signupForm.confirm_password }}
+                {% endif %}
+            </div>
+            </fieldset>
+            <div>
+            {{ signupForm.submit }}
+            </div>
+        </form>
     </body>
 </html>

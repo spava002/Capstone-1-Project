@@ -1,5 +1,7 @@
-from flask import Flask, render_template, url_for, redirect, request, session
+from flask import Flask, render_template, url_for, redirect, request, session, flash
 from flask_sqlalchemy import SQLAlchemy
+from loginForm import login
+from signupForm import signUp
 import logging
 
 
@@ -33,28 +35,64 @@ class Users(db.Model):
 with app.app_context():
     db.create_all()
 
-# Needs to be implemented
-# Login page for existing users
-# Forms integration needed to collect login information
-# Upon login, redirect to /home and update session with user data
-@app.route("/", methods=['GET'])
+# Landing page with login/sign-up fields
+@app.route("/", methods=['POST', 'GET'])
 def loginPage():
-    return render_template("login.html")
+    loginForm = login()
+    signupForm = signUp()
+    return render_template("login.html", loginForm=loginForm, signupForm=signupForm)
 
-# Needs to be implemented
-# Sign in page for new users
-# Forms integration needed to collect account creation information
-# Upon account creation, redirect to /
-@app.route("/signup", methods=['POST'])
-def signupPage():
-    pass
 
-# Needs to be implemented
-# Need to modify POST/GET methods based on use
+# Login functionality for existing users
+# Upon login, redirect to /home and update session with username
+@app.route("/login", methods=['POST', 'GET'])
+def loginUser():
+        loginForm = login()
+        signupForm = signUp()
+        if loginForm.validate_on_submit():
+            print("Login submitted.")
+            username = loginForm.username.data
+            password = loginForm.username.data
+            currentUser = Users.query.filter_by(username=username).first()
+            if currentUser and currentUser.password == password:
+                session['currentUser'] = username
+                return redirect(url_for("homePage"))
+            else:
+                flash("Invalid username or password. Try again.", "loginError")
+        return render_template("login.html", loginForm=loginForm, signupForm=signupForm)
+
+
+# Sign in functionality for new users
+# Upon account creation, redirect to /home and update session with username
+@app.route("/sign-up", methods=['POST', 'GET'])
+def signupUser():
+    loginForm = login()
+    signupForm = signUp()
+    if signupForm.validate_on_submit():
+        print("Sign up submitted.")
+        username = loginForm.username.data
+        password = loginForm.username.data
+        newUser = Users.query.filter_by(username=username).first()
+        # User exists in database
+        if newUser:
+            print("A user already exists.")
+            flash("Username taken. Try again.", "signupError")
+        # User doesn't exist in database
+        else:
+            print("User created.")
+            new_user = Users(username=username, password=password)
+            db.session.add(new_user)
+            db.session.commit()
+            session['currentUser'] = username
+            return redirect(url_for("homePage"))
+    return render_template("login.html", loginForm=loginForm, signupForm=signupForm)
+
+
 # Route for main home page
 @app.route("/home", methods=['POST', 'GET'])
 def homePage():
-    pass
+    current_user = session.get('currentUser')
+    return render_template("home.html", current_user=current_user)
 
 # Needs to be implemented
 # Logout page for when user is done
@@ -62,6 +100,11 @@ def homePage():
 @app.route("/logout")
 def logoutUser():
     pass
+
+@app.route("/db")
+def usersDatabase():
+    users_data = Users.query.all()
+    return render_template('database.html', users_data=users_data)
 
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0")

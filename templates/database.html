@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Database</title>
+        <!-- Links CSS stylesheet to the HTML page -->
+        <link rel = "stylesheet" type = text/css href = "{{ url_for('static', filename = 'css/signup.css') }}">
+    </head>
+
+    <body>
+        <h1>Database (For Testing Purposes)</h1>
+        <table>
+            <tr>
+                <th>Id</th>
+                <th>Username</th>
+            </tr>
+            {% for data in users_data  %}
+            <tr>
+                <td>{{ data.id }}</td>
+                <td>{{ data.username }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>
